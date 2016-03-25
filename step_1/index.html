@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简单运动</title>
+    <style>
+        .animateItem {
+            margin: 25px auto;
+            width: 120px;
+            height: 120px;
+            background-color: red;
+            line-height: 120px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="animateItem j-flag">点击旋转1</div>
+<div class="animateItem j-flag">点击旋转2</div>
+
+<script type="text/javascript">
+    var els = document.querySelectorAll('.j-flag'),
+            deg = 0,
+            animateItem1 = els[0],
+            animateItem2 = els[1];
+
+    animateItem1.addEventListener('click', function(){
+        var self = this;
+        setInterval(function(){
+            self.style.transform = 'rotate(' + (deg++) + 'deg)';
+        }, 17)
+    });
+
+    animateItem2.addEventListener('click', function(){
+        var self = this,
+            startTime = Date.now();
+
+        setInterval(function(){
+            var T = 1000;
+            var P = (Date.now()-startTime) / T;
+            self.style.transform = 'rotate(' + (360*P) + 'deg)';
+        }, 17)
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>抛物线运动</title>
+    <style>
+        .animateItem {
+            margin: 25px auto;
+            width: 120px;
+            height: 120px;
+            background-color: red;
+            line-height: 120px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="animateItem j-flag">点击移动</div>
+<script type="text/javascript">
+    var els = document.querySelectorAll('.j-flag'),
+            animateItem = els[0];
+
+    animateItem.addEventListener('click', function(){
+        var self = this,
+                disX = 200,
+                disY = 200,
+                startTime = Date.now(),
+                T = 1000 * Math.sqrt(2 * disY / 98); //运动总时间,1M ==> 10px  g = 98px/s
+
+        requestAnimationFrame(function step(){
+            var percent = Math.min(1.0, (Date.now() - startTime) / T),
+                    tx = disX * percent,
+                    ty = disY * percent * percent;
+
+            self.style.transform = 'translate(' + tx + 'px' + ',' + ty  +'px)';
+            if(percent < 1.0) requestAnimationFrame(arguments.callee);
+        })
+
+
+    })
+</script>
+</body>
+</html>

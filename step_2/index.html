@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>匀速直线运动</title>
+    <style>
+        .animateItem {
+            margin: 25px auto;
+            width: 120px;
+            height: 120px;
+            background-color: red;
+            line-height: 120px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="animateItem j-flag">点击移动</div>
+
+<script type="text/javascript">
+    var els = document.querySelectorAll('.j-flag'),
+            animateItem = els[0];
+
+    animateItem.addEventListener('click', function () {
+        var distance = 200,
+                self = this,
+                T = 2000,
+                startTime = Date.now();
+
+        requestAnimationFrame(function step() {
+            var percent = Math.min(1.0, (Date.now() - startTime) / T);
+            console.log(percent);
+            self.style.transform = 'translateX(' + (distance * percent) + 'px)';
+            if(percent < 1.0) requestAnimationFrame(step);
+        })
+    });
+
+
+</script>
+</body>
+</html>

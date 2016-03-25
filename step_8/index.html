@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>圆周运动——基于transform origin</title>
+    <style>
+        .animateItem {
+            margin: 25px auto;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: red;
+            line-height: 120px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="animateItem j-flag"></div>
+<script type="text/javascript">
+    var els = document.querySelectorAll('.j-flag'),
+            animateItem = els[0];
+
+    animateItem.addEventListener('click', function(){
+        var self = this,
+                r = 100,
+                startTime = Date.now(),
+                T = 2000; //运动总时间
+
+        requestAnimationFrame(function step(){
+            var percent = Math.min(1.0, (Date.now() - startTime) / T);
+            var rotation = 360 * percent;
+
+
+            self.style.transformOrigin = '0 ' + r + 'px';
+            self.style.transform = 'rotate('
+                    + rotation + 'deg)';
+            if(percent < 1.0)
+                requestAnimationFrame(arguments.callee);
+        })
+
+
+    })
+</script>
+</body>
+</html>
